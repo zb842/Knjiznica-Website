@@ -1,0 +1,43 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site1.master.cs" Inherits="Knjiznica.Site1" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title>KNJIŽNICA</title>
+    <link runat="server" href="~/Styles/style.css" rel="stylesheet" type="text/css" />
+
+    
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <nav class="navbar">
+                <ul class="nav-left">
+                    <li><a href="Home.aspx" class="<%= GetActiveClass("Home.aspx") %>">Home</a></li>
+                    <li><a href="Books.aspx" class="<%= GetActiveClass("Books.aspx") %>">Books</a></li>
+                    <% if (Session["User"] != null) { %>
+                        <li><a href="MyBooks.aspx" class="<%= GetActiveClass("MyBooks.aspx") %>">My Books</a></li>
+                    <% } %>
+                </ul>
+
+                <ul class="nav-right">
+                    <% if (Session["User"] == null) { %>
+                        <li><a href="Registracija.aspx" class="<%= GetActiveClass("Registracija.aspx") %>">Registracija</a></li>
+                        <li><a href="Prijava.aspx" class="<%= GetActiveClass("Prijava.aspx") %>">Prijava</a></li>
+                    <% } else { %>
+                        <li><span class="username-display"><%= Session["User"] %></span></li>
+                        <li><a href="Odjava.aspx">Odjava</a></li>
+                    <% } %>
+                </ul>
+            </nav>
+
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server" />
+
+        </div>
+    </form>
+</body>
+</html>
